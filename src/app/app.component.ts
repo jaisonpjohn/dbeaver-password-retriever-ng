@@ -6,5 +6,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'dbeaver-password-retriever-ng';
+  title = 'DBeaver Password Decrypter!\n';
+  encPassword = '';
+  decPassword = '';
+
+  sendEncrypted(encryptedPassword: String): void {
+    this.decPassword = this.encPassword
+    console.log('Encrypted Password is: '+encryptedPassword);
+  }
 }
