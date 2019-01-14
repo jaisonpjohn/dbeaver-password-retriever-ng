@@ -5,11 +5,27 @@
   </h1>
 </div>
 <div align="center">
-  <mat-form-field class="example-full-width">
+<!--  <mat-form-field class="passwordText">
     <input matInput placeholder="Encrypted Password" [(ngModel)]="encPassword">
-  </mat-form-field>
-  <button mat-raised-button color="primary" (click)="decrypt(encPassword)">Decrypt</button>
-  <mat-form-field class="example-full-width">
-    <input matInput placeholder="Decrypted Password" [(ngModel)]="decPassword">
-  </mat-form-field>
+  </mat-form-field>-->
+
+
+  <form class="example-form">
+    <mat-form-field class="passwordText">
+      <input matInput placeholder="Encrypted Password" [formControl]="emailFormControl"
+             [errorStateMatcher]="matcher" [(ngModel)]="encPassword">
+      <mat-hint>Encrypted Password Here!</mat-hint>
+      <mat-error *ngIf="emailFormControl.hasError('required')">
+        Encrypted Password is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="decrypt(encPassword)">Decrypt</button>
+    <mat-form-field class="passwordText">
+      <input matInput placeholder="Decrypted Password" [(ngModel)]="decPassword" name="decPasswordInput">
+    </mat-form-field>
+  </form>
+
+
+
+
 </div>
