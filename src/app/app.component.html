@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align:center">
-  <h1>
+  <h1 style="color: darkslateblue">
     Welcome to {{ title }}!
   </h1>
 </div>
@@ -11,16 +11,19 @@
 
 
   <form class="example-form">
-    <mat-form-field class="passwordText">
+    <mat-form-field class="passwordText" appearance="outline">
       <input matInput placeholder="Encrypted Password" [formControl]="emailFormControl"
-             [errorStateMatcher]="matcher" [(ngModel)]="encPassword">
+             [errorStateMatcher]="matcher">
       <mat-hint>Encrypted Password Here!</mat-hint>
+      <mat-error *ngIf="emailFormControl.hasError('incorrect')">
+        Couldn't decrypt!! Enter A Valid Encrypted text
+      </mat-error>
       <mat-error *ngIf="emailFormControl.hasError('required')">
         Encrypted Password is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <button mat-raised-button color="primary" (click)="decrypt(encPassword)">Decrypt</button>
-    <mat-form-field class="passwordText">
+    <button mat-raised-button color="primary" (click)="decrypt(this.emailFormControl.value)">Decrypt</button>
+    <mat-form-field class="passwordText" appearance="outline">
       <input matInput placeholder="Decrypted Password" [(ngModel)]="decPassword" name="decPasswordInput">
     </mat-form-field>
   </form>

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { DecryptorService } from "./decryptor.service";
 import {FormControl, FormGroupDirective, NgForm, Validators} from '@angular/forms';
 import {ErrorStateMatcher} from '@angular/material/core';
+import {MatSnackBar} from "@angular/material";
 
 /** Error when invalid control is dirty, touched, or submitted. */
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -17,7 +18,13 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private decryptorService: DecryptorService) { }
+  constructor(private decryptorService: DecryptorService, public snackBar: MatSnackBar) {
+    this.decryptorService.decrypt("OwEKLE4jpQ==")
+      .subscribe((data: Response) => {
+        console.log("warmed up: "+data.output);
+      }
+    )
+  }
   emailFormControl = new FormControl('', [
     Validators.required
   ]);
@@ -25,7 +32,6 @@ export class AppComponent {
   matcher = new MyErrorStateMatcher();
 
   title = 'DBeaver Password Decrypter!\n';
-  encPassword = '';
   decPassword = '';
 
   decrypt(encryptedPassword: string) {
@@ -33,7 +39,19 @@ export class AppComponent {
     this.decryptorService.decrypt(encryptedPassword)
       .subscribe((data: Response) => {
         this.decPassword = data.output
+      },
+        error1 => {
+          console.log(error1);
+          this.emailFormControl.setErrors({'incorrect': true});
+          this.openSnackBar("Please enter a valid Encrypted Password","Close")
       });
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+      verticalPosition: 'top'
+    });
   }
 }
 
