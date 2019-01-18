@@ -1,0 +1,47 @@
+version: 2
+jobs:
+  build:
+    docker:
+    - image: jaisonpjohn/angular:7.2_0
+    steps:
+    - checkout
+    - restore_cache:
+        keys:
+        - v1-dependencies
+    - run:
+        name: npm install
+        command: npm install
+    - run:
+        name: Building
+        command: |
+          ng build --aot=true --prod=true
+    - save_cache:
+        key: v1-dependencies
+        paths:
+        - node_modules
+    - persist_to_workspace:
+        root: ~/project
+        paths:
+        - dist
+
+  deploy:
+    docker:
+    - image: jaisonpjohn/aws-cli:1.16_0
+    steps:
+    - attach_workspace:
+        at: ~/project
+    - run:
+        name: Deploy to S3
+        command: aws s3 sync ./dist/dbeaver-password-retriever-ng s3://dbeaver-password-decrypter/ --delete
+
+workflows:
+  version: 2
+  build-deploy:
+    jobs:
+    - build
+    - deploy:
+        requires:
+        - build
+        filters:
+          branches:
+            only: master
