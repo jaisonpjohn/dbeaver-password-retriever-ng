@@ -5,11 +5,6 @@
   </h1>
 </div>
 <div align="center">
-<!--  <mat-form-field class="passwordText">
-    <input matInput placeholder="Encrypted Password" [(ngModel)]="encPassword">
-  </mat-form-field>-->
-
-
   <form class="example-form">
     <mat-form-field class="passwordText" appearance="outline">
       <input matInput placeholder="Encrypted Password" [formControl]="emailFormControl"
@@ -27,8 +22,10 @@
       <input matInput placeholder="Decrypted Password" [(ngModel)]="decPassword" name="decPasswordInput">
     </mat-form-field>
   </form>
-
-
-
-
 </div>
+<div align="left" style="padding: 20px">
+  <h2 style="color: darkslateblue">Shameless Plug</h2>
+  If this helped you, I would definitely appreciate a thumpsup for my <a href="https://stackoverflow.com/questions/39928401/recover-db-password-stored-in-my-dbeaver-connection/39928445#39928445">SO answer</a>
+</div>
+  <a href="https://stackoverflow.com/questions/39928401/recover-db-password-stored-in-my-dbeaver-connection/39928445#39928445"><img style="width:720px; height:158px" src="assets/shamelessplug.gif"></a>
+
