@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-    - image: jaisonpjohn/angular:7.2_0
+    - image: jaisonpjohn/angular:8.0.3
     steps:
     - checkout
     - restore_cache:
