@@ -1,2 +1,2 @@
-FROM node:8.15-alpine
+FROM node:12.4.0-alpine
 RUN apk update && apk add ca-certificates && npm install -g @angular/cli@8.0.3
