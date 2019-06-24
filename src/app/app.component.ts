@@ -31,7 +31,7 @@ export class AppComponent {
 
   matcher = new MyErrorStateMatcher();
 
-  title = 'DBeaver Password Decrypter!\n';
+  title = 'DBeaver Password Decrypter';
   decPassword = '';
 
   decrypt(encryptedPassword: string) {
