@@ -32,7 +32,7 @@ jobs:
         at: ~/project
     - run:
         name: Deploy to S3
-        command: aws s3 sync ./dist/dbeaver-password-retriever-ng s3://dbeaver-password-decrypter/ --delete
+        command: aws s3 sync ./dist/dbeaver-password-retriever-ng s3://bugdays.com/ --delete
 
 workflows:
   version: 2
